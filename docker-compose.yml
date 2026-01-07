@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  web:
+    build: .
+    container_name: devops_web
+    ports:
+      - "5000:5000"
+    networks:
+      - devops-net
+
+  ping:
+    image: busybox:latest
+    container_name: devops_ping
+    command: sh -c "while true; do echo ping-from-compose; sleep 10; done"
+    networks:
+      - devops-net
+
+networks:
+  devops-net:
+    driver: bridge
